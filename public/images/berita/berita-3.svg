@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <rect width="800" height="500" fill="#c97a1f"/>
+  <g stroke="#1c2438" stroke-width="5" fill="none" stroke-linejoin="round">
+    <rect x="330" y="210" width="140" height="98" rx="10"/>
+    <rect x="372" y="188" width="56" height="22" rx="5"/>
+    <circle cx="400" cy="262" r="26"/>
+  </g>
+  <text x="400" y="360" text-anchor="middle" font-family="Georgia, serif" font-size="22" fill="#1c2438">Ganti dengan foto berita 3</text>
+</svg>

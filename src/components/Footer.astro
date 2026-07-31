@@ -1,0 +1,84 @@
+---
+import WovenDivider from './WovenDivider.astro';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <WovenDivider inverted />
+  <div class="container site-footer__inner">
+    <div class="site-footer__col">
+      <h3 class="site-footer__title">GPT. Kristus Gembala Kupang</h3>
+      <p class="site-footer__muted">
+        Jl. Contoh Raya No. 12, Waingapu<br />
+        Sumba Timur, Nusa Tenggara Timur
+      </p>
+    </div>
+
+    <div class="site-footer__col">
+      <h3 class="site-footer__title">Jadwal ibadah</h3>
+      <p class="site-footer__muted">
+        Minggu, 08.00 &amp; 17.00 WITA<br />
+        Sekolah minggu, Minggu 08.00 WITA<br />
+        Persekutuan doa, Rabu 18.30 WITA
+      </p>
+    </div>
+
+    <div class="site-footer__col">
+      <h3 class="site-footer__title">Hubungi kami</h3>
+      <p class="site-footer__muted">
+        <a href="tel:+6281234567890">0812-3456-7890</a><br />
+        <a href="mailto:info@pelitakasih-contoh.org">info@pelitakasih-contoh.org</a>
+      </p>
+    </div>
+  </div>
+
+  <div class="container site-footer__bottom">
+    <p>&copy; {year} GPT.Kristus Gembala Kupang. Semua hak cipta dilindungi.</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--indigo-950);
+    color: var(--paper);
+    margin-top: 0;
+  }
+
+  .site-footer__inner {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    padding: 48px 24px 32px;
+  }
+
+  .site-footer__title {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    color: var(--paper);
+    margin-bottom: 0.6em;
+  }
+
+  .site-footer__muted {
+    color: rgba(251, 248, 241, 0.75);
+    font-size: 0.92rem;
+    line-height: 1.8;
+    margin: 0;
+  }
+
+  .site-footer__muted a:hover {
+    color: var(--marigold-500);
+  }
+
+  .site-footer__bottom {
+    border-top: 1px solid rgba(251, 248, 241, 0.15);
+    padding: 18px 24px;
+    font-size: 0.82rem;
+    color: rgba(251, 248, 241, 0.6);
+  }
+  .site-footer__bottom p { margin: 0; }
+
+  @media (max-width: 720px) {
+    .site-footer__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

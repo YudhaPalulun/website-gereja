@@ -1,0 +1,139 @@
+---
+import Base from '../layouts/Base.astro';
+import WovenDivider from '../components/WovenDivider.astro';
+
+const kontakCepat = [
+  { label: 'WhatsApp', value: '0812-3456-7890', href: 'https://wa.me/6281234567890' },
+  { label: 'Telepon', value: '0812-3456-7890', href: 'tel:+6281234567890' },
+  { label: 'Email', value: 'info@pelitakasih-contoh.org', href: 'mailto:info@pelitakasih-contoh.org' },
+  { label: 'Instagram', value: '@gerejapelitakasih', href: 'https://instagram.com' },
+];
+---
+<Base title="Kontak" description="Hubungi Gereja Pelita Kasih untuk pertanyaan, permohonan doa, atau kunjungan.">
+  <section class="page-header">
+    <div class="container">
+      <p class="eyebrow">Kontak</p>
+      <h1>Hubungi kami</h1>
+      <p class="page-header__lead">
+        Ada pertanyaan, ingin berkunjung, atau butuh didoakan? Tim kami senang
+        mendengar dari kamu.
+      </p>
+    </div>
+  </section>
+
+  <WovenDivider />
+
+  <section class="section">
+    <div class="container kontak-grid">
+      <div class="kontak-cepat">
+        <p class="eyebrow">Kontak cepat</p>
+        {kontakCepat.map((k) => (
+          <a class="kontak-item" href={k.href} target="_blank" rel="noopener">
+            <span class="kontak-item__label">{k.label}</span>
+            <span class="kontak-item__value">{k.value}</span>
+          </a>
+        ))}
+
+        <div class="card rekening-card">
+          <h3>Persembahan</h3>
+          <p class="info-card__desc">
+            Bank Contoh — 123-456-7890<br />
+            a.n. Gereja Pelita Kasih
+          </p>
+        </div>
+      </div>
+
+      <div class="card form-card">
+        <h3>Kirim pesan atau permohonan doa</h3>
+        <p class="info-card__desc">
+          Form ini belum terhubung ke mana pun — sambungkan ke layanan
+          seperti Formspree atau Netlify Forms supaya pesan benar-benar
+          terkirim ke email tim kamu.
+        </p>
+        <form class="kontak-form" action="#" method="post">
+          <label for="nama">Nama</label>
+          <input id="nama" name="nama" type="text" required />
+
+          <label for="email">Email atau nomor WhatsApp</label>
+          <input id="email" name="email" type="text" required />
+
+          <label for="pesan">Pesan</label>
+          <textarea id="pesan" name="pesan" rows="4" required></textarea>
+
+          <button class="btn btn-primary" type="submit">Kirim pesan</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .page-header { padding: 64px 0 40px; }
+  .page-header__lead {
+    color: var(--ink-700);
+    font-size: 1.05rem;
+    max-width: 60ch;
+  }
+
+  .kontak-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 32px;
+    align-items: start;
+  }
+
+  .kontak-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .kontak-item__label {
+    color: var(--ink-500);
+    font-size: 0.9rem;
+  }
+  .kontak-item__value {
+    font-weight: 600;
+  }
+
+  .rekening-card { margin-top: 24px; }
+
+  .form-card h3 { margin-bottom: 6px; }
+
+  .kontak-form {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 20px;
+  }
+  .kontak-form label {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--ink-700);
+    margin-top: 10px;
+  }
+  .kontak-form input,
+  .kontak-form textarea {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--paper);
+    color: var(--ink-900);
+    resize: vertical;
+  }
+  .kontak-form input:focus,
+  .kontak-form textarea:focus {
+    outline: none;
+    border-color: var(--indigo-500);
+  }
+  .kontak-form button {
+    margin-top: 16px;
+    align-self: flex-start;
+  }
+
+  @media (max-width: 720px) {
+    .kontak-grid { grid-template-columns: 1fr; }
+  }
+</style>

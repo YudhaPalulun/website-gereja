@@ -1,0 +1,158 @@
+---
+import Base from '../layouts/Base.astro';
+import WovenDivider from '../components/WovenDivider.astro';
+
+const majelis = [
+  { nama: 'Pdt. Nama Gembala Jemaat', peran: 'Gembala jemaat' },
+  { nama: 'Nama Majelis Satu', peran: 'Ketua majelis' },
+  { nama: 'Nama Majelis Dua', peran: 'Bendahara' },
+  { nama: 'Nama Majelis Tiga', peran: 'Koordinator pelayanan' },
+];
+
+function initials(nama: string) {
+  return nama
+    .replace('Pdt.', '')
+    .trim()
+    .split(' ')
+    .slice(0, 2)
+    .map((w) => w[0])
+    .join('');
+}
+---
+<Base title="Tentang kami" description="Sejarah, visi-misi, dan kepemimpinan Gereja Pelita Kasih.">
+  <section class="page-header">
+    <div class="container">
+      <p class="eyebrow">Tentang kami</p>
+      <h1>Perjalanan jemaat Gereja Pelita Kasih</h1>
+      <p class="page-header__lead">
+        Sebuah cerita singkat tentang bagaimana kami mulai, apa yang kami
+        yakini, dan siapa yang melayani bersama saat ini.
+      </p>
+    </div>
+  </section>
+
+  <WovenDivider />
+
+  <section class="section">
+    <div class="container narrow">
+      <p class="eyebrow">Sejarah</p>
+      <h2>Bagaimana kami mulai</h2>
+      <p>
+        Ganti paragraf ini dengan sejarah gerejamu yang sebenarnya —
+        kapan didirikan, oleh siapa, dan bagaimana perjalanan jemaat sampai
+        ke bentuknya yang sekarang. Ceritakan momen-momen penting: perpindahan
+        gedung, pertumbuhan jemaat, atau tantangan yang pernah dilalui bersama.
+      </p>
+      <p>
+        Paragraf kedua bisa membahas keadaan jemaat saat ini — berapa kira-kira
+        jumlah jemaat, kegiatan rutin apa saja yang berjalan, dan apa yang
+        membuat gereja ini terasa seperti rumah bagi anggotanya.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container two-col">
+      <div class="card">
+        <h3>Visi</h3>
+        <p class="info-card__desc">
+          Ganti dengan pernyataan visi gerejamu — arah besar yang ingin
+          dicapai jemaat dalam pelayanan dan kesaksian.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Misi</h3>
+        <p class="info-card__desc">
+          Ganti dengan poin-poin misi: bagaimana visi tersebut dijalankan
+          sehari-hari melalui ibadah, pemuridan, dan pelayanan sosial.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <WovenDivider />
+
+  <section class="section">
+    <div class="container narrow">
+      <p class="eyebrow">Yang kami yakini</p>
+      <h2>Pengakuan iman ringkas</h2>
+      <p>
+        Ganti bagian ini dengan ringkasan pengakuan iman atau afiliasi
+        denominasi gerejamu — misalnya rujukan pada Alkitab sebagai firman
+        Allah, pengakuan akan Tritunggal, dan keyakinan inti lain yang
+        dipegang jemaat.
+      </p>
+    </div>
+  </section>
+
+  <WovenDivider />
+
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">Kepemimpinan</p>
+      <h2>Gembala &amp; majelis jemaat</h2>
+      <div class="majelis-grid">
+        {majelis.map((m) => (
+          <div class="majelis-item">
+            <div class="majelis-item__mark" aria-hidden="true">{initials(m.nama)}</div>
+            <p class="majelis-item__nama">{m.nama}</p>
+            <p class="majelis-item__peran">{m.peran}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .page-header {
+    padding: 64px 0 40px;
+  }
+  .page-header__lead {
+    color: var(--ink-700);
+    font-size: 1.05rem;
+    max-width: 60ch;
+  }
+  .narrow { max-width: 720px; }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .majelis-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-top: 28px;
+  }
+  .majelis-item__mark {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--indigo-950);
+    color: var(--paper);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    margin-bottom: 12px;
+  }
+  .majelis-item__nama {
+    font-weight: 600;
+    margin: 0 0 2px;
+  }
+  .majelis-item__peran {
+    color: var(--ink-500);
+    font-size: 0.9rem;
+    margin: 0;
+  }
+
+  @media (max-width: 900px) {
+    .majelis-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .two-col { grid-template-columns: 1fr; }
+  }
+</style>

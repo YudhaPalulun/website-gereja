@@ -1,0 +1,168 @@
+/* ============================================
+   Design tokens
+   Palet terinspirasi tenun ikat NTT: indigo tua
+   sebagai warna celup utama, marigold sebagai
+   warna benang penegas, kertas hangat sebagai
+   dasar halaman.
+   ============================================ */
+:root {
+  --indigo-950: #1c2438;
+  --indigo-700: #2f3f61;
+  --indigo-500: #45598a;
+
+  --marigold-700: #9c5a12;
+  --marigold-600: #c97a1f;
+  --marigold-500: #db8a2c;
+  --marigold-100: #f6e4c4;
+
+  --paper: #fbf8f1;
+  --paper-dim: #f2ecdd;
+  --line: #dcd4bd;
+
+  --ink-900: #201d18;
+  --ink-700: #4a453a;
+  --ink-500: #756e5d;
+
+  --font-display: "Fraunces", "Georgia", serif;
+  --font-body: "Inter", "Segoe UI", sans-serif;
+
+  --radius: 6px;
+  --container: 1080px;
+}
+
+/* ============================================
+   Reset & base
+   ============================================ */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(rgba(251, 248, 241, 0.88), rgba(251, 248, 241, 0.88)),
+    url('/images/texture-mahkota-duri.jpg');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: var(--ink-900);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.15;
+  margin: 0 0 0.5em;
+  color: var(--ink-900);
+}
+
+h1 { font-size: clamp(2rem, 4.5vw, 3.4rem); }
+h2 { font-size: clamp(1.5rem, 3vw, 2.2rem); }
+h3 { font-size: 1.2rem; }
+
+p { margin: 0 0 1em; }
+
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Visually-hidden helper for accessibility (skip link target etc.) */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap; border: 0;
+}
+
+:focus-visible {
+  outline: 3px solid var(--marigold-500);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   Small reusable pieces
+   ============================================ */
+.eyebrow {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--marigold-700);
+  margin-bottom: 0.9em;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0.75em 1.4em;
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.btn-primary {
+  background: var(--indigo-950);
+  color: var(--paper);
+}
+.btn-primary:hover { background: var(--indigo-700); }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--indigo-950);
+  border-color: var(--indigo-950);
+}
+.btn-ghost:hover { background: var(--indigo-950); color: var(--paper); }
+
+.card {
+  background: var(--paper-dim);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 28px;
+}
+
+.section {
+  padding: 72px 0;
+}
+
+.section-tight {
+  padding: 48px 0;
+}
+
+@media (max-width: 640px) {
+  .section { padding: 48px 0; }
+}
+
+/* ============================================
+   Signature element: pembatas tenun (woven divider)
+   Motif zigzag ganda meniru pola tenun ikat,
+   dipakai sebagai penanda transisi antar bagian —
+   bukan sekadar hiasan, tapi "jahitan" antar bagian isi.
+   ============================================ */
+.woven-divider {
+  width: 100%;
+  height: 28px;
+  display: block;
+}

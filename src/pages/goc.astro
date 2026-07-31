@@ -1,0 +1,219 @@
+---
+import Base from '../layouts/Base.astro';
+import WovenDivider from '../components/WovenDivider.astro';
+ 
+const kategori = [
+  {
+    nama: 'GOC Kids',
+    slogan: 'Komunitas untuk anak-anak',
+    deskripsi:
+      'Menanamkan kasih Tuhan sejak dini lewat cerita, permainan, dan kegiatan yang menyenangkan bagi anak-anak.',
+    kelompok: ['Usia 4-6 tahun', 'Usia 7-9 tahun', 'Usia 10-12 tahun'],
+    gambar: '/images/goc/goc-kids.svg',
+  },
+  {
+    nama: 'GOC Teens',
+    slogan: 'Komunitas untuk remaja',
+    deskripsi:
+      'Ruang bertumbuh bagi remaja SMP dan SMA untuk menemukan jati diri dan iman yang kokoh bersama teman sebaya.',
+    kelompok: ['Kelas 7-9 (SMP)', 'Kelas 10-12 (SMA)'],
+    gambar: '/images/goc/goc-teens.svg',
+  },
+  {
+    nama: 'GOC Youth',
+    slogan: 'Komunitas untuk pemuda',
+    deskripsi:
+      'Komunitas bagi mahasiswa dan pekerja muda untuk saling menguatkan dalam iman dan pelayanan.',
+    kelompok: ['Mahasiswa', 'Pekerja muda'],
+    gambar: '/images/goc/goc-youth.svg',
+  },
+];
+ 
+const kegiatanMingguan = [
+  {
+    tanggal: '2 Agu 2026',
+    judul: 'GOC Youth: Malam pujian & sharing',
+    isi: 'Kumpul bersama, pujian, dan waktu berbagi untuk mahasiswa dan pekerja muda.',
+  },
+  {
+    tanggal: '3 Agu 2026',
+    judul: 'GOC Kids: Cerita Alkitab & permainan',
+    isi: 'Kegiatan bersama anak-anak dengan tema cerita Alkitab dan permainan seru.',
+  },
+];
+---
+<Base title="GOC" description="GOC — komunitas pemuda GPT.Kristus Gembala Kupang.">
+  <section class="goc-hero">
+    <img src="/images/goc/goc-hero.jpg" alt="Komunitas GOC" class="goc-hero__img" />
+    <div class="goc-hero__badge">
+      <p class="goc-hero__badge-title">GOC</p>
+      <p class="goc-hero__badge-tagline">Rumah bertumbuh untuk setiap generasi muda</p>
+    </div>
+  </section>
+ 
+  <section class="section">
+    <div class="container narrow">
+      <p class="eyebrow">Komunitas pemuda</p>
+      <h1>GOC</h1>
+      <p>
+        GOC adalah komunitas pemuda — tempat setiap anak,
+        remaja, dan pemuda bertumbuh bersama dalam iman, persahabatan, dan
+        pelayanan, sesuai kelompok usia masing-masing.
+      </p>
+    </div>
+  </section>
+ 
+  <WovenDivider />
+ 
+  <section class="section-tight">
+    <div class="container">
+      {kategori.map((k, i) => (
+        <div class:list={['goc-row', { 'goc-row--reverse': i % 2 === 1 }]}>
+          <img src={k.gambar} alt={k.nama} class="goc-row__img" loading="lazy" />
+          <div class="goc-row__content">
+            <p class="eyebrow">{k.slogan}</p>
+            <h2>{k.nama}</h2>
+            <p>{k.deskripsi}</p>
+            <ul class="goc-row__list">
+              {k.kelompok.map((g) => (
+                <li>{g}</li>
+              ))}
+            </ul>
+            <a class="btn btn-primary" href="/kontak">Gabung {k.nama} &rarr;</a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+ 
+  <WovenDivider />
+ 
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">Terus diperbarui</p>
+      <h2>Kegiatan minggu ini</h2>
+      <div class="goc-kegiatan-grid">
+        {kegiatanMingguan.map((k) => (
+          <div class="card goc-kegiatan-card">
+            <p class="goc-kegiatan-card__tanggal">{k.tanggal}</p>
+            <h3>{k.judul}</h3>
+            <p class="info-card__desc">{k.isi}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>
+ 
+<style>
+  .narrow {
+    max-width: 720px;
+  }
+ 
+  .goc-hero {
+    position: relative;
+    height: 480px;
+  }
+  .goc-hero__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .goc-hero__badge {
+    position: absolute;
+    left: 24px;
+    bottom: 24px;
+    max-width: 420px;
+    background: var(--indigo-950);
+    color: var(--paper);
+    padding: 20px 24px;
+    border-radius: 12px;
+  }
+  .goc-hero__badge-title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.6rem;
+    margin: 0 0 6px;
+  }
+  .goc-hero__badge-tagline {
+    font-size: 0.9rem;
+    color: rgba(251, 248, 241, 0.85);
+    margin: 0;
+  }
+ 
+  .goc-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+    margin-bottom: 64px;
+  }
+  .goc-row:last-child {
+    margin-bottom: 0;
+  }
+  .goc-row__img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+  .goc-row--reverse .goc-row__img {
+    order: 2;
+  }
+  .goc-row--reverse .goc-row__content {
+    order: 1;
+  }
+  .goc-row__list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .goc-row__list li {
+    padding-left: 20px;
+    position: relative;
+    color: var(--ink-700);
+    font-size: 0.95rem;
+  }
+  .goc-row__list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.5em;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--marigold-500);
+  }
+ 
+  .goc-kegiatan-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 28px;
+  }
+  .goc-kegiatan-card__tanggal {
+    color: var(--marigold-700);
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    margin: 0 0 0.5em;
+  }
+ 
+  @media (max-width: 768px) {
+    .goc-hero { height: 360px; }
+    .goc-hero__badge { left: 16px; right: 16px; bottom: 16px; max-width: none; }
+    .goc-row {
+      grid-template-columns: 1fr;
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+    .goc-row--reverse .goc-row__img,
+    .goc-row--reverse .goc-row__content {
+      order: initial;
+    }
+    .goc-kegiatan-grid { grid-template-columns: 1fr; }
+  }
+</style>

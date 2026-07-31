@@ -1,0 +1,250 @@
+---
+interface Slide {
+  image: string;
+  alt: string;
+  kicker: string;
+  title: string;
+  excerpt: string;
+  ctaLabel: string;
+  ctaHref: string;
+}
+
+interface Props {
+  slides: Slide[];
+}
+
+const { slides } = Astro.props;
+---
+<section class="hero-slider" aria-roledescription="carousel" aria-label="Sorotan Gereja Pelita Kasih">
+  <div class="hero-slider__track">
+    {slides.map((s, i) => (
+      <div class="hero-slide" class:list={[{ 'is-active': i === 0 }]} aria-hidden={i === 0 ? 'false' : 'true'}>
+        <img
+          src={s.image}
+          alt={s.alt}
+          class="hero-slide__img"
+          loading={i === 0 ? 'eager' : 'lazy'}
+        />
+        <div class="hero-slide__scrim" aria-hidden="true"></div>
+        <div class="hero-slide__content container">
+          <p class="hero-slide__kicker">{s.kicker}</p>
+          <h1 class="hero-slide__title">{s.title}</h1>
+          <p class="hero-slide__excerpt">{s.excerpt}</p>
+          <a class="btn btn-primary" href={s.ctaHref}>{s.ctaLabel}</a>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <button class="hero-slider__arrow hero-slider__arrow--prev" type="button" aria-label="Slide sebelumnya">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
+  </button>
+  <button class="hero-slider__arrow hero-slider__arrow--next" type="button" aria-label="Slide berikutnya">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
+  </button>
+
+  <div class="hero-slider__dots" role="tablist" aria-label="Pilih slide">
+    {slides.map((_, i) => (
+      <button
+        class="hero-slider__dot"
+        class:list={[{ 'is-active': i === 0 }]}
+        role="tab"
+        aria-selected={i === 0 ? 'true' : 'false'}
+        aria-label={`Ke slide ${i + 1}`}
+      ></button>
+    ))}
+  </div>
+</section>
+
+<style>
+  .hero-slider {
+    position: relative;
+    overflow: hidden;
+    height: 560px;
+    background: var(--indigo-950);
+  }
+
+  .hero-slider__track {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .hero-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.7s ease;
+  }
+  .hero-slide.is-active {
+    opacity: 1;
+    z-index: 1;
+  }
+
+  .hero-slide__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero-slide__scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(28, 36, 56, 0.1) 0%, rgba(28, 36, 56, 0.82) 100%);
+  }
+
+  .hero-slide__content {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding-bottom: 64px;
+    max-width: 640px;
+  }
+
+  .hero-slide__kicker {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--marigold-100);
+    margin: 0 0 0.8em;
+  }
+
+  .hero-slide__title {
+    color: var(--paper);
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    margin-bottom: 0.4em;
+  }
+
+  .hero-slide__excerpt {
+    color: rgba(251, 248, 241, 0.85);
+    max-width: 52ch;
+    margin-bottom: 1.2em;
+  }
+
+  .hero-slider__arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(251, 248, 241, 0.15);
+    border: 1px solid rgba(251, 248, 241, 0.4);
+    color: var(--paper);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 2;
+    transition: background-color 0.15s ease;
+  }
+  .hero-slider__arrow:hover { background: rgba(251, 248, 241, 0.3); }
+  .hero-slider__arrow svg { width: 20px; height: 20px; }
+  .hero-slider__arrow--prev { left: 20px; }
+  .hero-slider__arrow--next { right: 20px; }
+
+  .hero-slider__dots {
+    position: absolute;
+    bottom: 22px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 2;
+  }
+
+  .hero-slider__dot {
+    width: 9px;
+    height: 9px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: rgba(251, 248, 241, 0.4);
+    cursor: pointer;
+    transition: width 0.2s ease, background-color 0.2s ease;
+  }
+  .hero-slider__dot.is-active {
+    width: 22px;
+    border-radius: 5px;
+    background: var(--marigold-500);
+  }
+
+  @media (max-width: 720px) {
+    .hero-slider { height: 480px; }
+    .hero-slide__content { padding-bottom: 48px; }
+    .hero-slider__arrow { width: 38px; height: 38px; }
+  }
+</style>
+
+<script>
+  function initHeroSlider(root: Element) {
+    const slides = Array.from(root.querySelectorAll<HTMLElement>('.hero-slide'));
+    const dots = Array.from(root.querySelectorAll<HTMLElement>('.hero-slider__dot'));
+    const prevBtn = root.querySelector<HTMLElement>('.hero-slider__arrow--prev');
+    const nextBtn = root.querySelector<HTMLElement>('.hero-slider__arrow--next');
+    if (slides.length < 2) return;
+
+    let current = 0;
+    let timer: ReturnType<typeof setInterval> | null = null;
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function show(index: number) {
+      current = (index + slides.length) % slides.length;
+      slides.forEach((s, i) => {
+        s.classList.toggle('is-active', i === current);
+        s.setAttribute('aria-hidden', i === current ? 'false' : 'true');
+      });
+      dots.forEach((d, i) => {
+        d.classList.toggle('is-active', i === current);
+        d.setAttribute('aria-selected', i === current ? 'true' : 'false');
+      });
+    }
+
+    function next() { show(current + 1); }
+    function prev() { show(current - 1); }
+
+    function startAutoplay() {
+      if (prefersReduced) return;
+      stopAutoplay();
+      timer = setInterval(next, 6000);
+    }
+    function stopAutoplay() {
+      if (timer) clearInterval(timer);
+      timer = null;
+    }
+
+    prevBtn?.addEventListener('click', () => { prev(); startAutoplay(); });
+    nextBtn?.addEventListener('click', () => { next(); startAutoplay(); });
+    dots.forEach((d, i) => d.addEventListener('click', () => { show(i); startAutoplay(); }));
+
+    root.addEventListener('mouseenter', stopAutoplay);
+    root.addEventListener('mouseleave', startAutoplay);
+    root.addEventListener('focusin', stopAutoplay);
+    root.addEventListener('focusout', startAutoplay);
+
+    root.setAttribute('tabindex', '0');
+    root.addEventListener('keydown', (e) => {
+      const ev = e as KeyboardEvent;
+      if (ev.key === 'ArrowLeft') { prev(); startAutoplay(); }
+      if (ev.key === 'ArrowRight') { next(); startAutoplay(); }
+    });
+
+    let touchStartX: number | null = null;
+    root.addEventListener('touchstart', (e) => {
+      touchStartX = (e as TouchEvent).touches[0].clientX;
+    }, { passive: true });
+    root.addEventListener('touchend', (e) => {
+      if (touchStartX === null) return;
+      const dx = (e as TouchEvent).changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 40) { dx < 0 ? next() : prev(); startAutoplay(); }
+      touchStartX = null;
+    });
+
+    show(0);
+    startAutoplay();
+  }
+
+  document.querySelectorAll('.hero-slider').forEach(initHeroSlider);
+</script>

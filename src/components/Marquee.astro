@@ -1,0 +1,52 @@
+---
+interface Props {
+  text: string;
+  repeat?: number;
+}
+const { text, repeat = 10 } = Astro.props;
+const line = Array(repeat).fill(text).join('  \u2022  ');
+---
+<div class="marquee">
+  <div class="marquee__track" role="marquee" aria-label={text}>
+    <span class="marquee__text">{line}</span>
+    <span class="marquee__text" aria-hidden="true">{line}</span>
+  </div>
+</div>
+
+<style>
+  .marquee {
+    overflow: hidden;
+    background-color: #3a3a38;
+    background-image: url('/images/marquee/noise-gray.png');
+    background-repeat: repeat;
+    padding: 9px 0;
+  }
+
+  .marquee__track {
+    display: flex;
+    width: max-content;
+    animation: marquee-scroll 60s linear infinite;
+  }
+
+  .marquee__text {
+    white-space: nowrap;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.05rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--paper);
+    padding-right: 2rem;
+  }
+
+  @keyframes marquee-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee__track {
+      animation: none;
+    }
+  }
+</style>

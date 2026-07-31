@@ -1,0 +1,36 @@
+---
+// Elemen penanda (signature): motif zigzag ganda terinspirasi tenun ikat,
+// dipakai sebagai pembatas antar bagian halaman.
+interface Props {
+  inverted?: boolean; // pakai di atas latar gelap (mis. footer)
+}
+const { inverted = false } = Astro.props;
+const stroke = inverted ? '#f6e4c4' : '#c97a1f';
+const stroke2 = inverted ? '#8ea2cf' : '#2f3f61';
+---
+<div class="woven-divider" role="presentation" aria-hidden="true">
+  <svg class="woven-divider__svg" viewBox="0 0 240 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id={`weave-a-${inverted ? 'i' : 'n'}`} width="24" height="28" patternUnits="userSpaceOnUse">
+        <polyline points="0,22 6,10 12,22 18,10 24,22" fill="none" stroke={stroke} stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </pattern>
+      <pattern id={`weave-b-${inverted ? 'i' : 'n'}`} width="24" height="28" patternUnits="userSpaceOnUse">
+        <polyline points="0,6 6,18 12,6 18,18 24,6" fill="none" stroke={stroke2} stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.75"/>
+      </pattern>
+    </defs>
+    <rect x="0" y="0" width="240" height="28" fill={`url(#weave-b-${inverted ? 'i' : 'n'})`} />
+    <rect x="0" y="0" width="240" height="28" fill={`url(#weave-a-${inverted ? 'i' : 'n'})`} />
+  </svg>
+</div>
+
+<style>
+  .woven-divider {
+    width: 100%;
+    line-height: 0;
+  }
+  .woven-divider__svg {
+    width: 100%;
+    height: 28px;
+    display: block;
+  }
+</style>

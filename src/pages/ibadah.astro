@@ -1,0 +1,159 @@
+---
+import Base from '../layouts/Base.astro';
+import WovenDivider from '../components/WovenDivider.astro';
+
+const jadwal = [
+  { nama: 'Ibadah minggu I', waktu: 'Minggu, 08.00 WITA', ket: 'Bahasa Indonesia, dengan sekolah minggu' },
+  { nama: 'Ibadah minggu II', waktu: 'Minggu, 17.00 WITA', ket: 'Bahasa Indonesia' },
+  { nama: 'Sekolah minggu', waktu: 'Minggu, 08.00 WITA', ket: 'Bersamaan dengan ibadah minggu I' },
+  { nama: 'Persekutuan pemuda', waktu: 'Sabtu, 18.00 WITA', ket: 'Di aula gereja' },
+  { nama: 'Persekutuan doa', waktu: 'Rabu, 18.30 WITA', ket: 'Terbuka untuk semua jemaat' },
+];
+---
+<Base title="Ibadah" description="Jadwal ibadah, lokasi, dan info untuk jemaat baru di Gereja Pelita Kasih.">
+  <section class="page-header">
+    <div class="container">
+      <p class="eyebrow">Ibadah</p>
+      <h1>Jadwal &amp; lokasi ibadah</h1>
+      <p class="page-header__lead">
+        Semua jadwal ibadah rutin, alamat gereja, dan hal-hal yang perlu kamu
+        tahu sebelum datang pertama kali.
+      </p>
+    </div>
+  </section>
+
+  <WovenDivider />
+
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">Jadwal rutin</p>
+      <h2>Kegiatan mingguan</h2>
+      <div class="table-wrap">
+        <table class="jadwal-table">
+          <thead>
+            <tr>
+              <th>Kegiatan</th>
+              <th>Waktu</th>
+              <th>Keterangan</th>
+            </tr>
+          </thead>
+          <tbody>
+            {jadwal.map((j) => (
+              <tr>
+                <td data-label="Kegiatan">{j.nama}</td>
+                <td data-label="Waktu">{j.waktu}</td>
+                <td data-label="Keterangan">{j.ket}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <WovenDivider />
+
+  <section class="section" id="lokasi">
+    <div class="container lokasi-grid">
+      <div>
+        <p class="eyebrow">Lokasi</p>
+        <h2>Alamat &amp; arah</h2>
+        <p>
+          Jl. Contoh Raya No. 12, Waingapu<br />
+          Sumba Timur, Nusa Tenggara Timur
+        </p>
+        <p class="info-card__desc">
+          Patokan: seberang pasar Waingapu lama, gedung berwarna putih dengan
+          menara kecil. Parkir tersedia di halaman depan dan samping gedung.
+        </p>
+        <a class="btn btn-primary" href="https://www.google.com/maps/place/GPT.+Kristus+Gembala/@-10.1672772,123.6021265,17z/data=!3m1!4b1!4m6!3m5!1s0x2c569cabc609361d:0x62e9587578e5e97a!8m2!3d-10.1672772!4d123.6047014!16s%2Fg%2F11c0t9s83g" target="_blank" rel="noopener">
+          Buka di Google Maps
+        </a>
+      </div>
+      <div class="map-embed">
+        <!--
+          Ganti src di bawah dengan tautan embed dari gerejamu sendiri:
+          Google Maps -> Bagikan -> Sematkan peta -> salin kode src="..."
+        -->
+        <iframe
+          title="Peta lokasi Gereja Pelita Kasih"
+          src="https://www.google.com/maps?q=-10.1672772,123.6047014&z=17&output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .page-header { padding: 64px 0 40px; }
+  .page-header__lead {
+    color: var(--ink-700);
+    font-size: 1.05rem;
+    max-width: 60ch;
+  }
+
+  .table-wrap {
+    overflow-x: auto;
+    margin-top: 24px;
+  }
+  .jadwal-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+  }
+  .jadwal-table th,
+  .jadwal-table td {
+    text-align: left;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--line);
+  }
+  .jadwal-table th {
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--ink-900);
+  }
+  .jadwal-table td:first-child { font-weight: 600; }
+
+  .lokasi-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+  .map-embed {
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--line);
+  }
+  .map-embed iframe {
+    width: 100%;
+    height: 320px;
+    border: 0;
+  }
+
+
+  @media (max-width: 720px) {
+    .lokasi-grid { grid-template-columns: 1fr; }
+
+    .jadwal-table thead { display: none; }
+    .jadwal-table, .jadwal-table tbody, .jadwal-table tr, .jadwal-table td {
+      display: block;
+      width: 100%;
+    }
+    .jadwal-table tr {
+      border-bottom: 1px solid var(--line);
+      padding: 12px 0;
+    }
+    .jadwal-table td {
+      border-bottom: none;
+      padding: 4px 0;
+    }
+    .jadwal-table td::before {
+      content: attr(data-label) ": ";
+      font-weight: 600;
+      color: var(--ink-500);
+    }
+  }
+</style>

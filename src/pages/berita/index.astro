@@ -1,0 +1,81 @@
+---
+import Base from '../../layouts/Base.astro';
+import { berita } from '../../data/berita';
+---
+<Base title="Berita" description="Berita dan kabar terbaru dari Gereja Pelita Kasih.">
+  <section class="page-header">
+    <div class="container">
+      <p class="eyebrow">Berita</p>
+      <h1>Kabar dari Gereja Pelita Kasih</h1>
+      <p class="page-header__lead">
+        Kumpulan berita dan kegiatan terbaru dari jemaat kami.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container berita-grid">
+      {berita.map((b) => (
+        <a class="card berita-card" href={`/berita/${b.slug}`}>
+          <img src={b.gambar} alt={b.judul} class="berita-card__img" loading="lazy" />
+          <div class="berita-card__body">
+            <p class="berita-card__tanggal">{b.tanggal}</p>
+            <h3>{b.judul}</h3>
+            <p class="info-card__desc">{b.ringkasan}</p>
+            <span class="info-card__cta">Baca selengkapnya &rarr;</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+</Base>
+
+<style>
+  .page-header { padding: 64px 0 40px; }
+  .page-header__lead {
+    color: var(--ink-700);
+    font-size: 1.05rem;
+    max-width: 60ch;
+  }
+
+  .berita-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .berita-card {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    overflow: hidden;
+  }
+  .berita-card__img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+  }
+  .berita-card__body {
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-grow: 1;
+  }
+  .berita-card__tanggal {
+    color: var(--marigold-700);
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    margin: 0;
+  }
+  .berita-card h3 { margin: 0; }
+  .berita-card .info-card__desc { flex-grow: 1; }
+
+  @media (max-width: 900px) {
+    .berita-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .berita-grid { grid-template-columns: 1fr; }
+  }
+</style>

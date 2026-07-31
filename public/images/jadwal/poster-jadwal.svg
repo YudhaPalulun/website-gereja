@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600">
+  <rect width="900" height="600" fill="#1c2438"/>
+  <g stroke="#fbf8f1" stroke-width="6" fill="none" stroke-linejoin="round">
+    <rect x="390" y="255" width="120" height="90" rx="10"/>
+    <rect x="420" y="230" width="60" height="24" rx="6"/>
+    <circle cx="450" cy="300" r="24"/>
+  </g>
+  <text x="450" y="400" text-anchor="middle" font-family="Georgia, serif" font-size="26" fill="#fbf8f1">Ganti dengan poster jadwal ibadah</text>
+  <text x="450" y="434" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#f6e4c4">public/images/jadwal/poster-jadwal.svg</text>
+</svg>
