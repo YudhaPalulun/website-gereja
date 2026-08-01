@@ -1,26 +1,30 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { berita } from '../../data/berita';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
 
-export function getStaticPaths() {
+export async function getStaticPaths() {
+  const berita = await getCollection('berita');
   return berita.map((b) => ({
-    params: { slug: b.slug },
+    params: { slug: b.id },
     props: { b },
   }));
 }
 
-const { b } = Astro.props as { b: (typeof berita)[number] };
+const { b } = Astro.props as { b: CollectionEntry<'berita'> };
+const { Content } = await render(b);
+
+function formatTanggal(date: Date) {
+  return date.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
+}
 ---
-<Base title={b.judul} description={b.ringkasan}>
+<Base title={b.data.judul} description={b.data.ringkasan}>
   <article class="section">
     <div class="container narrow">
       <a class="back-link" href="/berita">&larr; Kembali ke semua berita</a>
-      <p class="eyebrow">{b.tanggal}</p>
-      <h1>{b.judul}</h1>
-      <img src={b.gambar} alt={b.judul} class="artikel__img" />
-      {b.isi.map((paragraf) => (
-        <p>{paragraf}</p>
-      ))}
+      <p class="eyebrow">{formatTanggal(b.data.tanggal)}</p>
+      <h1>{b.data.judul}</h1>
+      <img src={b.data.gambarDetail ?? b.data.gambar} alt={b.data.judul} class="artikel__img" />
+      <Content />
     </div>
   </article>
 </Base>

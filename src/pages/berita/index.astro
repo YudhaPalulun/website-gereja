@@ -1,6 +1,14 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { berita } from '../../data/berita';
+import { getCollection } from 'astro:content';
+
+const berita = (await getCollection('berita')).sort(
+  (a, b) => b.data.tanggal.valueOf() - a.data.tanggal.valueOf()
+);
+
+function formatTanggal(date: Date) {
+  return date.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
+}
 ---
 <Base title="Berita" description="Berita dan kabar terbaru dari Gereja Pelita Kasih.">
   <section class="page-header">
@@ -16,12 +24,12 @@ import { berita } from '../../data/berita';
   <section class="section">
     <div class="container berita-grid">
       {berita.map((b) => (
-        <a class="card berita-card" href={`/berita/${b.slug}`}>
-          <img src={b.gambar} alt={b.judul} class="berita-card__img" loading="lazy" />
+        <a class="card berita-card" href={`/berita/${b.id}`}>
+          <img src={b.data.gambar} alt={b.data.judul} class="berita-card__img" loading="lazy" />
           <div class="berita-card__body">
-            <p class="berita-card__tanggal">{b.tanggal}</p>
-            <h3>{b.judul}</h3>
-            <p class="info-card__desc">{b.ringkasan}</p>
+            <p class="berita-card__tanggal">{formatTanggal(b.data.tanggal)}</p>
+            <h3>{b.data.judul}</h3>
+            <p class="info-card__desc">{b.data.ringkasan}</p>
             <span class="info-card__cta">Baca selengkapnya &rarr;</span>
           </div>
         </a>

@@ -1,0 +1,69 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# Setelah admin login dan simpan perubahan lewat panel ini,
+# Decap CMS otomatis membuat commit ke repo GitHub kita,
+# dan Netlify otomatis build ulang situsnya (1-2 menit).
+
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "berita"
+    label: "Berita"
+    label_singular: "Berita"
+    folder: "src/content/berita"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    summary: "{{judul}} — {{tanggal}}"
+    sortable_fields: ["tanggal", "judul"]
+    fields:
+      - { label: "Judul", name: "judul", widget: "string" }
+      - label: "Tanggal"
+        name: "tanggal"
+        widget: "datetime"
+        format: "YYYY-MM-DD"
+        date_format: "YYYY-MM-DD"
+        time_format: false
+      - { label: "Ringkasan (tampil di kartu)", name: "ringkasan", widget: "text" }
+      - label: "Foto (kartu di beranda & daftar berita)"
+        name: "gambar"
+        widget: "image"
+        media_folder: "/public/images/berita"
+        public_folder: "/images/berita"
+      - label: "Foto (halaman detail, opsional — kalau kosong pakai foto kartu)"
+        name: "gambarDetail"
+        widget: "image"
+        required: false
+        media_folder: "/public/images/berita"
+        public_folder: "/images/berita"
+      - { label: "Isi berita", name: "body", widget: "markdown" }
+
+  - name: "jadwal"
+    label: "Jadwal Ibadah"
+    label_singular: "Jadwal"
+    folder: "src/content/jadwal"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    summary: "{{title}} — {{hari}}, {{jam}}"
+    sortable_fields: ["urutan", "title"]
+    fields:
+      - { label: "Nama kegiatan", name: "title", widget: "string" }
+      - label: "Hari"
+        name: "hari"
+        widget: "select"
+        options: ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"]
+      - { label: "Jam", name: "jam", widget: "string", hint: "Contoh: 18.00 WITA" }
+      - label: "Poster jadwal"
+        name: "image"
+        widget: "image"
+        media_folder: "/public/images/jadwal"
+        public_folder: "/images/jadwal"
+      - label: "Urutan tampil"
+        name: "urutan"
+        widget: "number"
+        default: 1
+        hint: "Angka kecil tampil lebih dulu di carousel (1, 2, 3, dst)"

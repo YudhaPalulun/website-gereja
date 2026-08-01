@@ -1,12 +1,14 @@
 ---
 import Base from '../layouts/Base.astro';
 import WovenDivider from '../components/WovenDivider.astro';
-
+ 
+const waNumber = '628113822774'; // format 62xxxxxxxxxx, tanpa +, spasi, atau tanda hubung
+ 
 const kontakCepat = [
-  { label: 'WhatsApp', value: '0812-3456-7890', href: 'https://wa.me/6281234567890' },
-  { label: 'Telepon', value: '0812-3456-7890', href: 'tel:+6281234567890' },
-  { label: 'Email', value: 'info@pelitakasih-contoh.org', href: 'mailto:info@pelitakasih-contoh.org' },
-  { label: 'Instagram', value: '@gerejapelitakasih', href: 'https://instagram.com' },
+  { label: 'WhatsApp', value: '+62 811-3822-774', href: `https://wa.me/${waNumber}` },
+  { label: 'Telepon', value: '+62 811-3822-774', href: `tel:+${waNumber}` },
+  { label: 'Facebook', value: 'Yeremia Priyanto', href: 'https://www.facebook.com/pelitakasih' },
+  { label: 'Instagram', value: '@youth_goc_', href: 'https://instagram.com/youth_goc_' },
 ];
 ---
 <Base title="Kontak" description="Hubungi Gereja Pelita Kasih untuk pertanyaan, permohonan doa, atau kunjungan.">
@@ -20,9 +22,9 @@ const kontakCepat = [
       </p>
     </div>
   </section>
-
+ 
   <WovenDivider />
-
+ 
   <section class="section">
     <div class="container kontak-grid">
       <div class="kontak-cepat">
@@ -33,40 +35,49 @@ const kontakCepat = [
             <span class="kontak-item__value">{k.value}</span>
           </a>
         ))}
-
-        <div class="card rekening-card">
-          <h3>Persembahan</h3>
-          <p class="info-card__desc">
-            Bank Contoh — 123-456-7890<br />
-            a.n. Gereja Pelita Kasih
-          </p>
-        </div>
       </div>
-
+ 
       <div class="card form-card">
         <h3>Kirim pesan atau permohonan doa</h3>
         <p class="info-card__desc">
-          Form ini belum terhubung ke mana pun — sambungkan ke layanan
-          seperti Formspree atau Netlify Forms supaya pesan benar-benar
-          terkirim ke email tim kamu.
+          Isi formnya, lalu tombol "Kirim pesan" akan membuka WhatsApp dengan
+          pesanmu sudah terisi otomatis, tinggal ditekan kirim di sana.
         </p>
-        <form class="kontak-form" action="#" method="post">
+        <form class="kontak-form" id="kontak-form" data-wa-number={waNumber}>
           <label for="nama">Nama</label>
           <input id="nama" name="nama" type="text" required />
-
+ 
           <label for="email">Email atau nomor WhatsApp</label>
           <input id="email" name="email" type="text" required />
-
+ 
           <label for="pesan">Pesan</label>
           <textarea id="pesan" name="pesan" rows="4" required></textarea>
-
+ 
           <button class="btn btn-primary" type="submit">Kirim pesan</button>
         </form>
       </div>
     </div>
   </section>
 </Base>
-
+ 
+<script>
+  const form = document.getElementById('kontak-form');
+ 
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+ 
+    const waNumber = form.getAttribute('data-wa-number') || '';
+    const nama = (document.getElementById('nama') as HTMLInputElement).value.trim();
+    const kontak = (document.getElementById('email') as HTMLInputElement).value.trim();
+    const pesan = (document.getElementById('pesan') as HTMLTextAreaElement).value.trim();
+ 
+    const teks = `Halo, saya ${nama} (${kontak}).\n\n${pesan}`;
+    const url = `https://wa.me/${waNumber}?text=${encodeURIComponent(teks)}`;
+ 
+    window.open(url, '_blank');
+  });
+</script>
+ 
 <style>
   .page-header { padding: 64px 0 40px; }
   .page-header__lead {
@@ -74,14 +85,14 @@ const kontakCepat = [
     font-size: 1.05rem;
     max-width: 60ch;
   }
-
+ 
   .kontak-grid {
     display: grid;
     grid-template-columns: 1fr 1.2fr;
     gap: 32px;
     align-items: start;
   }
-
+ 
   .kontak-item {
     display: flex;
     justify-content: space-between;
@@ -95,11 +106,11 @@ const kontakCepat = [
   .kontak-item__value {
     font-weight: 600;
   }
-
+ 
   .rekening-card { margin-top: 24px; }
-
+ 
   .form-card h3 { margin-bottom: 6px; }
-
+ 
   .kontak-form {
     display: flex;
     flex-direction: column;
@@ -132,7 +143,7 @@ const kontakCepat = [
     margin-top: 16px;
     align-self: flex-start;
   }
-
+ 
   @media (max-width: 720px) {
     .kontak-grid { grid-template-columns: 1fr; }
   }

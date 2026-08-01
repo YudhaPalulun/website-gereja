@@ -3,9 +3,16 @@ import Base from '../layouts/Base.astro';
 import WovenDivider from '../components/WovenDivider.astro';
 import HeroSlider from '../components/HeroSlider.astro';
 import Marquee from '../components/Marquee.astro';
-import { berita } from '../data/berita';
+import { getCollection } from 'astro:content';
  
-const beritaTerbaru = berita.slice(0, 3);
+const beritaEntries = (await getCollection('berita')).sort(
+  (a, b) => b.data.tanggal.valueOf() - a.data.tanggal.valueOf()
+);
+const beritaTerbaru = beritaEntries.slice(0, 3);
+ 
+function formatTanggal(date: Date) {
+  return date.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
+}
  
 const slides = [
   {
@@ -14,7 +21,7 @@ const slides = [
     kicker: '',
     title: '',
     excerpt: '',
-    ctaLabel: 'Lihat jadwal lengkap',
+    ctaLabel: '',
     ctaHref: '/ibadah',
   },
   {
@@ -37,13 +44,9 @@ const slides = [
   },
 ];
  
-const jadwalCarousel = [
-  { title: 'Doa Penyembahan', hari: 'Selasa', jam: '18.00 WITA', image: '/images/jadwal/jadwal-1.jpg' },
-  { title: 'Ibadah Pendalaman Alkitab', hari: 'Jumat', jam: '18.00 WITA', image: '/images/jadwal/jadwal-2.jpg' },
-  { title: 'Doa Puasa', hari: 'Sabtu', jam: '11.00 WITA', image: '/images/jadwal/jadwal-3.jpg' },
-  { title: 'Ibadah Raya Minggu', hari: 'Minggu', jam: '09.00 WITA', image: '/images/jadwal/jadwal-4.jpg' },
-  { title: 'Ibadah Sekolah Minggu', hari: 'Minggu', jam: '09.30 WITA', image: '/images/jadwal/jadwal-5.jpg' },
-];
+const jadwalCarousel = (await getCollection('jadwal')).sort(
+  (a, b) => a.data.urutan - b.data.urutan
+);
  
 const bottomCards = [
   {
@@ -117,11 +120,11 @@ const visiMisi = [
         <div class="jadwal-carousel__viewport">
           <div class="jadwal-carousel__track">
             {jadwalCarousel.map((item) => (
-              <a class="jadwal-card" href={item.image}>
-                <img src={item.image} alt={item.title} class="jadwal-card__img" loading="lazy" />
+              <a class="jadwal-card" href={item.data.image}>
+                <img src={item.data.image} alt={item.data.title} class="jadwal-card__img" loading="lazy" />
                 <div class="jadwal-card__badge">
-                  <span>{item.hari}</span>
-                  <span>{item.jam}</span>
+                  <span>{item.data.hari}</span>
+                  <span>{item.data.jam}</span>
                 </div>
               </a>
             ))}
@@ -167,7 +170,7 @@ const visiMisi = [
       </div>
     </div>
   </section>
-
+ 
   <WovenDivider />
  
   <!-- Berita terbaru -->
@@ -182,14 +185,14 @@ const visiMisi = [
       </div>
       <div class="berita-grid-home">
         {beritaTerbaru.map((b) => (
-          <a class="card berita-card" href={`/berita/${b.slug}`}>
+          <a class="card berita-card" href={`/berita/${b.id}`}>
             <div class="berita-card__img-wrap">
-              <img src={b.gambar} alt={b.judul} class="berita-card__img" loading="lazy" />
+              <img src={b.data.gambar} alt={b.data.judul} class="berita-card__img" loading="lazy" />
             </div>
             <div class="berita-card__body">
-              <p class="berita-card__tanggal">{b.tanggal}</p>
-              <h3>{b.judul}</h3>
-              <p class="info-card__desc">{b.ringkasan}</p>
+              <p class="berita-card__tanggal">{formatTanggal(b.data.tanggal)}</p>
+              <h3>{b.data.judul}</h3>
+              <p class="info-card__desc">{b.data.ringkasan}</p>
               <span class="info-card__cta">Baca selengkapnya &rarr;</span>
             </div>
           </a>
@@ -229,7 +232,9 @@ const visiMisi = [
  
 <style>
   .jadwal-section {
-    max-width: 1320px;
+    max-width: none;
+    padding-left: 40px;
+    padding-right: 40px;
   }
  
   .jadwal-heading {
@@ -310,6 +315,7 @@ const visiMisi = [
  
   @media (max-width: 900px) {
     .jadwal-card { flex: 0 0 calc((100% - 20px) / 2); }
+    .jadwal-section { padding-left: 24px; padding-right: 24px; }
   }
   @media (max-width: 640px) {
     .jadwal-card { flex: 0 0 100%; }
@@ -344,11 +350,12 @@ const visiMisi = [
     background: var(--indigo-950);
     color: var(--marigold-500);
     display: flex;
-
+    align-items: center;
+    justify-content: center;
+  }
   .info-card__icon svg {
     width: 26px;
     height: 26px;
-  }
   }
   .info-card__desc {
     color: var(--ink-700);
@@ -484,7 +491,7 @@ const visiMisi = [
     grid-template-columns: repeat(3, 1fr);
     gap: 28px;
   }
-
+ 
   .berita-card {
     display: flex;
     flex-direction: column;
