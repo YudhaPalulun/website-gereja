@@ -8,6 +8,10 @@ backend:
 
 media_folder: "public/images/uploads"
 public_folder: "/images/uploads"
+media_library:
+  name: default
+  config:
+    max_file_size: 1000000
 
 collections:
   - name: "berita"
@@ -61,7 +65,7 @@ collections:
       - label: "Poster jadwal"
         name: "image"
         widget: "image"
-        media_folder: "public/images/jadwal"
+        media_folder: "/public/images/jadwal"
         public_folder: "/images/jadwal"
       - label: "Urutan tampil"
         name: "urutan"
@@ -93,5 +97,4 @@ collections:
         widget: "image"
         media_folder: "/public/images/goc"
         public_folder: "/images/goc"
-        max_file_size: 1000000
         hint: "Maksimal 1 MB. silahkan kompres dulu kalau fotonya besar."
