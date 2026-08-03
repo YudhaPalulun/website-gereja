@@ -11,3 +11,9 @@ node_modules/
 # editor
 .vscode/
 .DS_Store
+
+# astro generated
+.astro/
+
+# arsip
+website-gereja.zip
