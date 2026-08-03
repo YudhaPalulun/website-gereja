@@ -20,7 +20,17 @@ const jadwal = defineCollection({
     jam: z.string(),
     image: z.string(),
     urutan: z.number().default(1),
+    }),
+  });
+
+const kegiatan = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/kegiatan' }),
+  schema: z.object({
+    judul: z.string(),
+    tanggal: z.coerce.date(),
+    isi: z.string(),
+    gambar: z.string(),
   }),
 });
 
-export const collections = { berita, jadwal };
+export const collections = { berita, jadwal, kegiatan };

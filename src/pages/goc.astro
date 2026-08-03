@@ -1,46 +1,16 @@
 ---
 import Base from '../layouts/Base.astro';
 import WovenDivider from '../components/WovenDivider.astro';
+import { getCollection } from 'astro:content';
+
+const kegiatanEntries = (await getCollection('kegiatan'))
+  .sort((a, b) => b.data.tanggal.valueOf() - a.data.tanggal.valueOf())
+  .slice(0, 6);
+
+function formatTanggal(date: Date) {
+  return date.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
+}
  
-const kategori = [
-  {
-    nama: 'GOC Kids',
-    slogan: 'Komunitas untuk anak-anak',
-    deskripsi:
-      'Menanamkan kasih Tuhan sejak dini lewat cerita, permainan, dan kegiatan yang menyenangkan bagi anak-anak.',
-    kelompok: ['Usia 4-6 tahun', 'Usia 7-9 tahun', 'Usia 10-12 tahun'],
-    gambar: '/images/goc/goc-kids.svg',
-  },
-  {
-    nama: 'GOC Teens',
-    slogan: 'Komunitas untuk remaja',
-    deskripsi:
-      'Ruang bertumbuh bagi remaja SMP dan SMA untuk menemukan jati diri dan iman yang kokoh bersama teman sebaya.',
-    kelompok: ['Kelas 7-9 (SMP)', 'Kelas 10-12 (SMA)'],
-    gambar: '/images/goc/goc-teens.svg',
-  },
-  {
-    nama: 'GOC Youth',
-    slogan: 'Komunitas untuk pemuda',
-    deskripsi:
-      'Komunitas bagi mahasiswa dan pekerja muda untuk saling menguatkan dalam iman dan pelayanan.',
-    kelompok: ['Mahasiswa', 'Pekerja muda'],
-    gambar: '/images/goc/goc-youth.svg',
-  },
-];
- 
-const kegiatanMingguan = [
-  {
-    tanggal: '2 Agu 2026',
-    judul: 'GOC Youth: Malam pujian & sharing',
-    isi: 'Kumpul bersama, pujian, dan waktu berbagi untuk mahasiswa dan pekerja muda.',
-  },
-  {
-    tanggal: '3 Agu 2026',
-    judul: 'GOC Kids: Cerita Alkitab & permainan',
-    isi: 'Kegiatan bersama anak-anak dengan tema cerita Alkitab dan permainan seru.',
-  },
-];
 ---
 <Base title="GOC" description="GOC — komunitas pemuda GPT.Kristus Gembala Kupang.">
   <section class="goc-hero">
@@ -67,43 +37,25 @@ const kegiatanMingguan = [
  
   <section class="section-tight">
     <div class="container">
-      {kategori.map((k, i) => (
-        <div class:list={['goc-row', { 'goc-row--reverse': i % 2 === 1 }]}>
-          <img src={k.gambar} alt={k.nama} class="goc-row__img" loading="lazy" />
-          <div class="goc-row__content">
-            <p class="eyebrow">{k.slogan}</p>
-            <h2>{k.nama}</h2>
-            <p>{k.deskripsi}</p>
-            <ul class="goc-row__list">
-              {k.kelompok.map((g) => (
-                <li>{g}</li>
-              ))}
-            </ul>
-            <a class="btn btn-primary" href="/kontak">Gabung {k.nama} &rarr;</a>
-          </div>
-        </div>
-      ))}
-    </div>
-  </section>
- 
-  <WovenDivider />
- 
-  <section class="section">
-    <div class="container">
       <p class="eyebrow">Terus diperbarui</p>
       <h2>Kegiatan minggu ini</h2>
-      <div class="goc-kegiatan-grid">
-        {kegiatanMingguan.map((k) => (
-          <div class="card goc-kegiatan-card">
-            <p class="goc-kegiatan-card__tanggal">{k.tanggal}</p>
-            <h3>{k.judul}</h3>
-            <p class="info-card__desc">{k.isi}</p>
+      <div class="goc-kegiatan-rows">
+        {kegiatanEntries.map((k, i) => (
+          <div class:list={['goc-row', { 'goc-row--reverse': i % 2 === 1 }]}>
+            <img src={k.data.gambar} alt={k.data.judul} class="goc-row__img" loading="lazy" />
+            <div class="goc-row__content">
+              <p class="goc-kegiatan-card__tanggal">{formatTanggal(k.data.tanggal)}</p>
+              <h3>{k.data.judul}</h3>
+              <p>{k.data.isi}</p>
+            </div>
           </div>
         ))}
       </div>
     </div>
   </section>
 </Base>
+
+
  
 <style>
   .narrow {
@@ -188,10 +140,7 @@ const kegiatanMingguan = [
     background: var(--marigold-500);
   }
  
-  .goc-kegiatan-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+  .goc-kegiatan-rows {
     margin-top: 28px;
   }
   .goc-kegiatan-card__tanggal {
@@ -214,6 +163,6 @@ const kegiatanMingguan = [
     .goc-row--reverse .goc-row__content {
       order: initial;
     }
-    .goc-kegiatan-grid { grid-template-columns: 1fr; }
+
   }
 </style>

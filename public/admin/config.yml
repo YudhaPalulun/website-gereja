@@ -68,3 +68,30 @@ collections:
         widget: "number"
         default: 1
         hint: "Angka kecil tampil lebih dulu di carousel (1, 2, 3, dst)"
+
+      - name: "kegiatan"
+        label: "Kegiatan GOC"
+        label_singular: "Kegiatan"
+        folder: "src/content/kegiatan"
+        create: true
+        delete: true
+        identifier_field: "judul"
+        slug: "{{year}}-{{month}}-{{day}}-{{judul}}"
+        summary: "{{judul}} — {{tanggal}}"
+        sortable_fields: ["tanggal", "judul"]
+        fields:
+          - { label: "Nama kegiatan", name: "judul", widget: "string" }
+          - label: "Tanggal"
+            name: "tanggal"
+            widget: "datetime"
+            format: "YYYY-MM-DD"
+            date_format: "YYYY-MM-DD"
+            time_format: false
+          - { label: "Keterangan singkat", name: "isi", widget: "text" }
+          - label: "Foto kegiatan"
+            name: "gambar"
+            widget: "image"
+            media_folder: "/public/images/goc"
+            public_folder: "/images/goc"
+            max_file_size: 1000000
+            hint: "Maksimal 1 MB. silahkan kompres dulu kalau fotonya besar."
