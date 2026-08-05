@@ -8,10 +8,6 @@ backend:
 
 media_folder: "public/images/uploads"
 public_folder: "/images/uploads"
-media_library:
-  name: default
-  config:
-    max_file_size: 1000000
 
 collections:
   - name: "berita"
