@@ -1,158 +1,315 @@
 ---
 import Base from '../layouts/Base.astro';
 import WovenDivider from '../components/WovenDivider.astro';
-
-const majelis = [
-  { nama: 'Pdt. Nama Gembala Jemaat', peran: 'Gembala jemaat' },
-  { nama: 'Nama Majelis Satu', peran: 'Ketua majelis' },
-  { nama: 'Nama Majelis Dua', peran: 'Bendahara' },
-  { nama: 'Nama Majelis Tiga', peran: 'Koordinator pelayanan' },
+ 
+const perjalanan = [
+  {
+    gambar: '/images/tentang/perjalanan-1.jpg',
+    keterangan: 'Sejarah gereja — dari Jl. Irian Jaya, Oeba (1996) hingga Jl. W. J. Lalamentik (1999).',
+    lengkap: 'Gereja Pantekosta Tabernakel Kristus Gembala Kupang, atau yang lebih dikenal dengan GPT. Kristus Gembala Kupang, merupakan salah satu gereja yang bertumbuh dengan membawa visi untuk memberitakan Injil dan melayani masyarakat melalui kasih Kristus. Gereja ini resmi berdiri pada tahun 1996, didirikan oleh Almarhum Pdt. Gersom Sunarto bersama istri tercinta, Ibu Martha Kushardiyanti, yang dengan penuh iman dan pengabdian memulai pelayanan untuk menggembalakan jemaat di Kota Kupang.\n\nPada awal berdirinya, kegiatan ibadah dan pelayanan dilaksanakan di Jl. Irian Jaya No. 16, Oeba, Kota Kupang. Di tempat inilah jemaat pertama kali berkumpul, bersekutu, bertumbuh dalam iman, dan menjadi fondasi bagi perkembangan pelayanan gereja. Dengan penyertaan Tuhan, jumlah jemaat terus bertambah sehingga pelayanan semakin berkembang dari waktu ke waktu.\n\nMemasuki tahun 1999, seiring dengan pertumbuhan jemaat dan kebutuhan akan tempat ibadah yang lebih memadai, gereja berpindah lokasi ke Jl. W. J. Lalamentik No. 59A, Kota Kupang. Hingga saat ini, lokasi tersebut menjadi pusat pelayanan GPT. Kristus Gembala Kupang dalam melaksanakan berbagai kegiatan peribadahan, pembinaan rohani, pelayanan sosial, serta penginjilan kepada masyarakat.\n\nPada Februari 2011, GPT. Kristus Gembala Kupang mengalami masa duka ketika pendiri sekaligus gembala sidang, Almarhum Pdt. Gersom Sunarto, dipanggil pulang ke rumah Bapa. Kepergian beliau menjadi kehilangan yang mendalam bagi keluarga, jemaat, dan seluruh pelayan Tuhan yang telah menyaksikan dedikasi serta pengabdiannya dalam membangun dan menggembalakan gereja sejak awal berdiri.\n\nUntuk meneruskan visi pelayanan yang telah dirintis, pada Februari 2011 tongkat estafet kepemimpinan gereja dilanjutkan oleh putra beliau, Pdt. Yeremia Priyanto, M.Th, bersama istri tercinta, Ibu Erlin Priyanto. Di bawah kepemimpinan beliau, GPT. Kristus Gembala Kupang terus bertumbuh dalam pelayanan, memperkuat pembinaan rohani jemaat, mengembangkan berbagai bidang pelayanan, serta berupaya menjawab kebutuhan zaman tanpa meninggalkan nilai-nilai kebenaran Firman Tuhan.\n\nHingga saat ini, GPT. Kristus Gembala Kupang tetap berdiri sebagai tempat persekutuan, penyembahan, dan pembinaan iman bagi seluruh jemaat. Dengan berlandaskan kasih Kristus, gereja terus berkomitmen untuk memberitakan Injil, melayani masyarakat, membangun kehidupan rohani setiap generasi, serta menjadi terang dan garam bagi lingkungan sekitar. Warisan iman dan semangat pelayanan yang telah diletakkan oleh Almarhum Pdt. Gersom Sunarto terus dilanjutkan melalui kepemimpinan Pdt. Yeremia Priyanto, M.Th, sehingga GPT. Kristus Gembala Kupang senantiasa menjadi gereja yang bertumbuh, berdampak, dan memuliakan nama Tuhan.',
+  },
+  {
+    gambar: '/images/tentang/perjalanan-2.jpg',
+    keterangan: 'Perayaan 30 tahun GPT. Kristus Gembala Kupang bersama Pdt. Yeremia Priyanto, M.Th dan Ibu Erlin Priyanto.',
+    lengkap: 'Memasuki usia pelayanan yang ke-30 tahun, GPT. Kristus Gembala Kupang mengucap syukur atas kasih setia Tuhan yang senantiasa menyertai setiap langkah perjalanan gereja sejak didirikan pada tahun 1996. Tiga dekade perjalanan ini menjadi bukti nyata penyertaan Tuhan dalam memelihara, menuntun, dan memberkati setiap pelayanan, baik pada masa perintisan maupun dalam perkembangan gereja hingga saat ini.\n\nDi bawah penggembalaan Pdt. Yeremia Priyanto, M.Th bersama istri tercinta, Ibu Erlin Priyanto, GPT. Kristus Gembala Kupang terus bertumbuh sebagai gereja yang berpusat kepada Kristus, berlandaskan Firman Tuhan, serta dipimpin oleh kasih dan kuasa Roh Kudus. Berbagai pelayanan terus dikembangkan untuk menjangkau semua kalangan, mulai dari anak-anak, remaja, pemuda, keluarga, hingga lanjut usia, sehingga setiap jemaat dapat bertumbuh dalam iman dan hidup sebagai murid Kristus.',
+  },
+  {
+    gambar: '/images/tentang/perjalanan-3.jpg',
+    keterangan: 'Heartfully for His Glory — jemaat dan pelayan Tuhan dalam perayaan 30 tahun.',
+    lengkap: 'Momentum 30 tahun ini bukan sekadar memperingati perjalanan waktu, tetapi juga menjadi kesempatan untuk mengenang warisan pelayanan yang telah diletakkan oleh Almarhum Pdt. Gersom Sunarto bersama Ibu Martha Kushardiyanti. Fondasi iman, semangat pengabdian, dan keteladanan yang mereka tinggalkan terus menjadi inspirasi bagi seluruh jemaat dalam melanjutkan panggilan Tuhan.\n\nDengan mengusung semangat pembaruan tanpa meninggalkan nilai-nilai Alkitabiah, GPT. Kristus Gembala Kupang terus berkomitmen menjadi gereja yang berdampak bagi masyarakat, menghadirkan kasih Kristus melalui pelayanan, penginjilan, pembinaan rohani, serta berbagai kegiatan sosial. Di usia yang ke-30 tahun, seluruh jemaat diajak untuk terus bersatu hati, melayani dengan setia, dan melangkah bersama dalam mewujudkan visi Tuhan bagi gereja.',
+  },
+  {
+    gambar: '/images/tentang/perjalanan-4.jpg',
+    keterangan: 'Melangkah ke babak baru pelayanan bersama keluarga besar jemaat.',
+    lengkap: 'Kiranya peringatan 30 tahun ini menjadi awal dari babak baru pelayanan yang semakin diberkati, semakin kuat dalam iman, serta semakin luas dalam menjangkau jiwa-jiwa bagi kemuliaan nama Tuhan Yesus Kristus. Dengan penuh ucapan syukur, GPT. Kristus Gembala Kupang melangkah menuju masa depan dengan keyakinan bahwa Tuhan yang telah memimpin selama tiga dekade akan terus menyertai dan memberkati pelayanan gereja pada tahun-tahun yang akan datang.',
+  },
 ];
-
-function initials(nama: string) {
-  return nama
-    .replace('Pdt.', '')
-    .trim()
-    .split(' ')
-    .slice(0, 2)
-    .map((w) => w[0])
-    .join('');
-}
 ---
-<Base title="Tentang kami" description="Sejarah, visi-misi, dan kepemimpinan Gereja Pelita Kasih.">
-  <section class="page-header">
-    <div class="container">
-      <p class="eyebrow">Tentang kami</p>
-      <h1>Perjalanan jemaat Gereja Pelita Kasih</h1>
-      <p class="page-header__lead">
-        Sebuah cerita singkat tentang bagaimana kami mulai, apa yang kami
-        yakini, dan siapa yang melayani bersama saat ini.
-      </p>
-    </div>
+<Base title="Tentang kami" description="Sejarah dan perjalanan jemaat GPT. Kristus Gembala Kupang.">
+  <h1 class="sr-only">Perjalanan jemaat GPT. Kristus Gembala Kupang</h1>
+ 
+  <section class="perjalanan-section">
+    {perjalanan.map((p) => (
+      <figure class="perjalanan__item">
+        <div class="perjalanan__img-wrap">
+          <img src={p.gambar} alt={p.keterangan} class="perjalanan__img" loading="lazy" />
+        </div>
+        <figcaption class="perjalanan__cap">{p.keterangan}</figcaption>
+        {p.lengkap && (
+          <button
+            class="perjalanan__btn"
+            type="button"
+            data-gambar={p.gambar}
+            data-judul={p.keterangan}
+            data-lengkap={p.lengkap}
+          >
+            Baca selengkapnya
+          </button>
+        )}
+      </figure>
+    ))}
   </section>
-
+ 
+  <dialog class="foto-modal" id="fotoModal">
+    <button class="foto-modal__tutup" type="button" aria-label="Tutup">&times;</button>
+    <div class="foto-modal__img-wrap">
+      <img class="foto-modal__img" src="" alt="" />
+    </div>
+    <div class="foto-modal__isi">
+      <p class="foto-modal__judul"></p>
+      <p class="foto-modal__teks"></p>
+    </div>
+  </dialog>
+ 
   <WovenDivider />
-
-  <section class="section">
-    <div class="container narrow">
-      <p class="eyebrow">Sejarah</p>
-      <h2>Bagaimana kami mulai</h2>
-      <p>
-        Ganti paragraf ini dengan sejarah gerejamu yang sebenarnya —
-        kapan didirikan, oleh siapa, dan bagaimana perjalanan jemaat sampai
-        ke bentuknya yang sekarang. Ceritakan momen-momen penting: perpindahan
-        gedung, pertumbuhan jemaat, atau tantangan yang pernah dilalui bersama.
-      </p>
-      <p>
-        Paragraf kedua bisa membahas keadaan jemaat saat ini — berapa kira-kira
-        jumlah jemaat, kegiatan rutin apa saja yang berjalan, dan apa yang
-        membuat gereja ini terasa seperti rumah bagi anggotanya.
-      </p>
-    </div>
-  </section>
-
-  <section class="section-tight">
-    <div class="container two-col">
-      <div class="card">
-        <h3>Visi</h3>
-        <p class="info-card__desc">
-          Ganti dengan pernyataan visi gerejamu — arah besar yang ingin
-          dicapai jemaat dalam pelayanan dan kesaksian.
-        </p>
-      </div>
-      <div class="card">
-        <h3>Misi</h3>
-        <p class="info-card__desc">
-          Ganti dengan poin-poin misi: bagaimana visi tersebut dijalankan
-          sehari-hari melalui ibadah, pemuridan, dan pelayanan sosial.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <WovenDivider />
-
-  <section class="section">
-    <div class="container narrow">
-      <p class="eyebrow">Yang kami yakini</p>
-      <h2>Pengakuan iman ringkas</h2>
-      <p>
-        Ganti bagian ini dengan ringkasan pengakuan iman atau afiliasi
-        denominasi gerejamu — misalnya rujukan pada Alkitab sebagai firman
-        Allah, pengakuan akan Tritunggal, dan keyakinan inti lain yang
-        dipegang jemaat.
-      </p>
-    </div>
-  </section>
-
-  <WovenDivider />
-
+ 
   <section class="section">
     <div class="container">
-      <p class="eyebrow">Kepemimpinan</p>
-      <h2>Gembala &amp; majelis jemaat</h2>
-      <div class="majelis-grid">
-        {majelis.map((m) => (
-          <div class="majelis-item">
-            <div class="majelis-item__mark" aria-hidden="true">{initials(m.nama)}</div>
-            <p class="majelis-item__nama">{m.nama}</p>
-            <p class="majelis-item__peran">{m.peran}</p>
-          </div>
-        ))}
+      <div class="gembala">
+        <div class="gembala__foto">
+          <img src="/images/tentang/gembala-sidang.jpg" alt="Pdt. Yeremia Priyanto, M.Th" loading="lazy" />
+          <span class="gembala__kilat" aria-hidden="true"></span>
+        </div>
+        <div class="gembala__teks">
+          <p class="eyebrow">Gembala Sidang</p>
+          <h2>GPT. Kristus Gembala Kupang</h2>
+          <p class="gembala__nama">Pdt. Yeremia Priyanto, M.Th</p>
+        </div>
       </div>
     </div>
   </section>
 </Base>
-
+ 
+<script>
+  const modal = document.getElementById('fotoModal') as HTMLDialogElement | null;
+ 
+  if (modal) {
+    const mImg = modal.querySelector('.foto-modal__img') as HTMLImageElement;
+    const mJudul = modal.querySelector('.foto-modal__judul') as HTMLElement;
+    const mTeks = modal.querySelector('.foto-modal__teks') as HTMLElement;
+    const mTutup = modal.querySelector('.foto-modal__tutup') as HTMLButtonElement;
+ 
+    document.querySelectorAll<HTMLButtonElement>('.perjalanan__btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        mImg.src = btn.dataset.gambar ?? '';
+        mImg.alt = btn.dataset.judul ?? '';
+        mJudul.textContent = btn.dataset.judul ?? '';
+        mTeks.textContent = btn.dataset.lengkap ?? '';
+        modal.showModal();
+      });
+    });
+ 
+    mTutup.addEventListener('click', () => modal.close());
+ 
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) modal.close();
+    });
+  }
+</script>
+ 
 <style>
-  .page-header {
-    padding: 64px 0 40px;
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
   }
-  .page-header__lead {
-    color: var(--ink-700);
-    font-size: 1.05rem;
-    max-width: 60ch;
+ 
+  .perjalanan-section {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 48px 24px 56px;
   }
-  .narrow { max-width: 720px; }
-
-  .two-col {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
+  .perjalanan__item {
+    margin: 0 0 56px;
+    text-align: center;
   }
-
-  .majelis-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
-    margin-top: 28px;
+  .perjalanan__item:last-child {
+    margin-bottom: 0;
   }
-  .majelis-item__mark {
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
+  .perjalanan__img-wrap,
+  .foto-modal__img-wrap {
+    position: relative;
+    overflow: hidden;
+  }
+  .perjalanan__img-wrap {
+    border-radius: 12px;
+  }
+  .perjalanan__img-wrap::after,
+  .foto-modal__img-wrap::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 55%;
+    height: 100%;
+    background: linear-gradient(
+      115deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.45) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    animation: berita-shine 2s ease-in-out infinite;
+    pointer-events: none;
+  }
+  @keyframes berita-shine {
+    0% { left: -150%; }
+    100% { left: 150%; }
+  }
+  .perjalanan__img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    display: block;
     background: var(--indigo-950);
-    color: var(--paper);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--font-display);
-    margin-bottom: 12px;
   }
-  .majelis-item__nama {
+  .perjalanan__cap {
+    max-width: 64ch;
+    margin: 18px auto 0;
+    color: var(--ink-700);
+    font-size: 0.88rem;
+    line-height: 1.7;
+  }
+  .perjalanan__btn {
+    margin-top: 12px;
+    padding: 8px 20px;
+    border: 1px solid var(--marigold-500);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--marigold-700);
+    font-family: inherit;
+    font-size: 0.82rem;
     font-weight: 600;
-    margin: 0 0 2px;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
   }
-  .majelis-item__peran {
-    color: var(--ink-500);
-    font-size: 0.9rem;
+  .perjalanan__btn:hover {
+    background: var(--marigold-500);
+    color: var(--indigo-950);
+  }
+ 
+  .foto-modal {
+    width: min(820px, 92vw);
+    max-height: 88vh;
+    padding: 0;
+    border: 0;
+    border-radius: 14px;
+    background: var(--paper);
+    overflow: auto;
+  }
+  .foto-modal::backdrop {
+    background: rgba(20, 18, 40, 0.72);
+  }
+  .foto-modal__tutup {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    width: 36px;
+    height: 36px;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(20, 18, 40, 0.6);
+    color: #fff;
+    font-size: 1.4rem;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 2;
+  }
+  .foto-modal__img {
+    width: 100%;
+    display: block;
+    background: var(--indigo-950);
+  }
+  .foto-modal__isi {
+    padding: 24px 28px 32px;
+  }
+  .foto-modal__judul {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    margin: 0 0 10px;
+  }
+  .foto-modal__teks {
     margin: 0;
+    color: var(--ink-700);
+    font-size: 0.95rem;
+    line-height: 1.75;
+    white-space: pre-line;
   }
-
-  @media (max-width: 900px) {
-    .majelis-grid { grid-template-columns: repeat(2, 1fr); }
+ 
+  .gembala {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 56px;
+    align-items: center;
   }
-  @media (max-width: 640px) {
-    .two-col { grid-template-columns: 1fr; }
+  .gembala__foto {
+    position: relative;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid var(--marigold-500);
+  }
+  .gembala__foto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .gembala__kilat {
+    position: absolute;
+    top: -60%;
+    left: -120%;
+    width: 60%;
+    height: 220%;
+    background: linear-gradient(
+      100deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.45) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    transform: rotate(18deg);
+    animation: kilat 4.5s ease-in-out infinite;
+    pointer-events: none;
+  }
+  @keyframes kilat {
+    0%, 65% { left: -120%; }
+    100% { left: 160%; }
+  }
+  .gembala__nama {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    color: var(--marigold-700);
+    margin: 8px 0 0;
+  }
+ 
+  @media (prefers-reduced-motion: reduce) {
+    .perjalanan__img-wrap::after,
+    .foto-modal__img-wrap::after,
+    .gembala__kilat { animation: none; }
+  }
+ 
+  @media (max-width: 768px) {
+    .perjalanan-section { padding: 32px 16px 40px; }
+    .perjalanan__item { margin-bottom: 40px; }
+    .perjalanan__img { aspect-ratio: 4 / 3; }
+    .perjalanan__cap { font-size: 0.85rem; }
+    .foto-modal__isi { padding: 20px 20px 28px; }
+    .gembala {
+      grid-template-columns: 1fr;
+      gap: 28px;
+      justify-items: center;
+      text-align: center;
+    }
+    .gembala__foto {
+      width: 240px;
+      height: 240px;
+    }
   }
 </style>
