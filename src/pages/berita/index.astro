@@ -10,11 +10,11 @@ function formatTanggal(date: Date) {
   return date.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
 }
 ---
-<Base title="Berita" description="Berita dan kabar terbaru dari Gereja Pelita Kasih.">
+<Base title="Berita" description="GPT UPDATE!.">
   <section class="page-header">
     <div class="container">
       <p class="eyebrow">Berita</p>
-      <h1>Kabar dari Gereja Pelita Kasih</h1>
+      <h1 class="neon">GPT UPDATE!</h1>
       <p class="page-header__lead">
         Kumpulan berita dan kegiatan terbaru dari jemaat kami.
       </p>
@@ -85,5 +85,35 @@ function formatTanggal(date: Date) {
   }
   @media (max-width: 640px) {
     .berita-grid { grid-template-columns: 1fr; }
+  }
+  .neon {
+    --neon-warna: #ff2d2d;
+    color: #fff;
+    text-shadow:
+      0 0 4px #fff,
+      0 0 10px var(--neon-warna),
+      0 0 22px var(--neon-warna),
+      0 0 40px var(--neon-warna);
+    animation:
+      neon-warna 3s steps(1) infinite,
+      neon-kedip 4.5s ease-in-out infinite;
+  }
+
+  @keyframes neon-warna {
+    0%, 49% { --neon-warna: #ff2d2d; }
+    50%, 100% { --neon-warna: #7aa2ff; }
+  }
+
+  @keyframes neon-kedip {
+    0%, 8%, 10%, 14%, 100% { opacity: 1; }
+    9% { opacity: 0.35; }
+    12% { opacity: 0.5; }
+    62% { opacity: 1; }
+    63% { opacity: 0.3; }
+    64% { opacity: 1; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .neon { animation: none; }
   }
 </style>

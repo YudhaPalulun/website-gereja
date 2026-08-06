@@ -120,7 +120,7 @@ const visiMisi = [
         <div class="jadwal-carousel__viewport">
           <div class="jadwal-carousel__track">
             {jadwalCarousel.map((item) => (
-              <a class="jadwal-card" href={item.data.image}>
+              <a class="jadwal-card" href={item.data.image} data-hari={item.data.hari}>
                 <img src={item.data.image} alt={item.data.title} class="jadwal-card__img" loading="lazy" />
                 <div class="jadwal-card__badge">
                   <span>{item.data.hari}</span>
@@ -603,6 +603,34 @@ const visiMisi = [
  
     render();
   }
+  const urutanHari = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+
+  function hariIniWita() {
+    const nama = new Intl.DateTimeFormat('id-ID', {
+      weekday: 'long',
+      timeZone: 'Asia/Makassar',
+    }).format(new Date());
+    return urutanHari.indexOf(nama);
+  }
+
+  function urutkanJadwal(section: Element) {
+    const track = section.querySelector<HTMLElement>('.jadwal-carousel__track');
+    if (!track) return;
+
+    const hariIni = hariIniWita();
+    if (hariIni < 0) return;
+
+    Array.from(track.querySelectorAll<HTMLElement>('.jadwal-card'))
+      .map((el) => {
+        const idx = urutanHari.indexOf(el.dataset.hari ?? '');
+        return { el, jarak: idx < 0 ? 99 : (idx - hariIni + 7) % 7 };
+      })
+      .sort((a, b) => a.jarak - b.jarak)
+      .forEach(({ el }) => track.appendChild(el));
+  }
  
-  document.querySelectorAll('.jadwal-section').forEach(initJadwalCarousel);
+   document.querySelectorAll('.jadwal-section').forEach((section) => {
+    urutkanJadwal(section);
+    initJadwalCarousel(section);
+  });
 </script>
